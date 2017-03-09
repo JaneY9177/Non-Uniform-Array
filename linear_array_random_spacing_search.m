@@ -14,10 +14,15 @@ thetaM=90;
 count=1;
 %% random search
 for m=1:10000
-    d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber-1);
-    d=[0,d];
+%     d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber-1);
+%     d=[0,d];
+
+
+    d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber/2-1);
+    d=[0,d,spacingMIN*2 + (spacingMAX*2-spacingMIN*2).*rand(1),d];
+
     % d=[spacingMIN/2,spacingMIN*ones(1,elementNumber/2-1)];
-    
+
     for nn=2:length(d)
         d(nn)=d(nn-1)+d(nn);
     end
@@ -29,6 +34,9 @@ for m=1:10000
     % nn=21;
     % d=resultd(nn,:);
     %w=resultw(nn,:)';
+    
+    plot(d,zeros(1,length(d)),'x');
+    axis([0,d(length(d)),-1,1]);
     
     %% Array factor
     A=zeros(length(theta),elementNumber);

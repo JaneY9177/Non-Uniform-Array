@@ -9,21 +9,20 @@ angleStep=0.05;
 theta=0:angleStep:360;
 elementNumber=16;
 spacingMIN=0.5; % minimum space between two elements
-spacingMAX=1.6;   % maximum space between two elements
+spacingMAX=2;   % maximum space between two elements
 mainbeam=5;     % width of the main lobe
 thetaM=90;      % location of the main lobe
 
 %% random spacing
-d=[0, spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber-1)];
-d=[spacingMIN/2,spacingMIN*ones(1,elementNumber/2-1)];
+%     d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber-1);
+%     d=[0,d];
+
+d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber/2-1);
+d=[0,d,spacingMIN*2 + (spacingMAX*2-spacingMIN*2).*rand(1),d];
 
 for nn=2:length(d)
     d(nn)=d(nn-1)+d(nn);
 end
-
-figure(1);
-plot(d,zeros(1,length(d)),'x');
-axis([0,d(length(d)),-1,1]);
 
 %% check results
 % load('resultd.mat');
@@ -32,6 +31,10 @@ axis([0,d(length(d)),-1,1]);
 % nn=21;
 % d=resultd(nn,:);
 %w=resultw(nn,:)';
+
+figure(1);
+plot(d,zeros(1,length(d)),'x');
+axis([0,d(length(d)),-1,1]);
 
 %% Array factor
 A=zeros(length(theta),elementNumber);
@@ -55,7 +58,7 @@ for nn=1:length(d)
 end
 
 %% Optimization
-cvx_begin
+cvx_begin quiet
 variable w(elementNumber) complex
 minimize( max(abs(A_SL*w)) )
 subject to
