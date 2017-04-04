@@ -1,6 +1,9 @@
-%% random spacing linear array side lobe Optimization
-
-%clear;
+%%
+%  Verification for Random Spacing Linear Array Side Lobe Optimization Steering to Other Angles
+%
+%  Version 1
+%  Zhengyu Peng
+%%
 
 %% Configuration
 wavelength=1;
@@ -81,8 +84,3 @@ for kk=1:r
     end
     
 end
-%% Plot result
-%w=ones(1,elementNumber)';
-% figure(2);
-% plot(theta,20*log10(abs(A*w))-max(20*log10(abs(A*w))));
-% axis([0,180,-30,0]);

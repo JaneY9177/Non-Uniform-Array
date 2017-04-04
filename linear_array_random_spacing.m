@@ -1,6 +1,11 @@
-%% random spacing linear array side lobe Optimization
+%%
+%  Random Spacing Linear Array Side Lobe Optimization
+%
+%  Version 1
+%  Zhengyu Peng
+%%
 
-%clear;
+clear;
 
 %% Configuration
 wavelength=1;
@@ -9,33 +14,33 @@ angleStep=0.05;
 theta=0:angleStep:360;
 elementNumber=16;
 spacingMIN=0.5; % minimum space between two elements
-spacingMAX=2;   % maximum space between two elements
+spacingMAX=3.5;   % maximum space between two elements
 mainbeam=5;     % width of the main lobe
 thetaM=90;      % location of the main lobe
 
 %% random spacing
+% d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14
+
 %     d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber-1);
 %     d=[0,d];
 
 %% random symmetrical spacing
+% d0, d1, d2, d3, d4, d5, d6, d7, d6, d5, d4, d3, d2, d1, d0
+
 % d=[spacingMIN/2 + (spacingMAX/2-spacingMIN/2).*rand(1), spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber/2-1)];
 % d1=fliplr(d);
 % d=[0,d1(1:length(d1)-1),d1(length(d1))+d(1),d(2:length(d))];
 
+%% random spacing + shift
+% d0, d1, d2, d3, d4, d5, d6, d7, d0, d1, d2, d3, d4, d5, d6
+
 d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber/2-1);
 d=[0,d,spacingMIN*2 + (spacingMAX*2-spacingMIN*2).*rand(1),d];
 
+%%
 for nn=2:length(d)
     d(nn)=d(nn-1)+d(nn);
 end
-
-%% check results
-% load('resultd.mat');
-% load('resultw.mat')
-% [r,c]=size(resultd);
-% nn=21;
-% d=resultd(nn,:);
-%w=resultw(nn,:)';
 
 figure(1);
 plot(d,zeros(1,length(d)),'x');
@@ -63,7 +68,7 @@ for nn=1:length(d)
 end
 
 %% Optimization
-cvx_begin quiet
+cvx_begin %quiet
 variable w(elementNumber) complex
 minimize( max(abs(A_SL*w)) )
 subject to
