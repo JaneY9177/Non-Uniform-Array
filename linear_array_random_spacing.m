@@ -21,8 +21,8 @@ thetaM=90;      % location of the main lobe
 %% random spacing
 % d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14
 
-%     d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber-1);
-%     d=[0,d];
+% d=spacingMIN + (spacingMAX-spacingMIN).*rand(1,elementNumber-1);
+% d=[0,d];
 
 %% random symmetrical spacing
 % d0, d1, d2, d3, d4, d5, d6, d7, d6, d5, d4, d3, d2, d1, d0
