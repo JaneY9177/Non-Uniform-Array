@@ -82,6 +82,6 @@ plot(theta1,20*log10(abs(A3*w3))-max(20*log10(abs(A3*w3))),'r:','LineWidth',1.5)
 plot(theta1,20*log10(abs(A4*w4))-max(20*log10(abs(A4*w4))),'g-.','LineWidth',1.5);
 hold off;
 axis([-90,90,-30,0]);
-xlabel('Zenith angel (Degree)');
+xlabel('Zenith angle (Degree)');
 ylabel('Normalized directivity (dBi)');
 legend('16-element non-uniformly spaced','16-element \lambda/2 uniformly spaced','16-element uniformly spaced sparse array','26-element \lambda/2 uniformly spaced');
